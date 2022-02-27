@@ -14,4 +14,9 @@ class ArgMaxPolicy(object):
         
         ## TODO return the action that maxinmizes the Q-value 
         # at the current observation as the output
+        batch_szie = observation.shape[0]
+        qa_values = self.critic.qa_values(observation)
+
+        assert qa_values.shape[0] == batch_szie
+        action = np.argmax(qa_values, axis = 1)
         return action.squeeze()
